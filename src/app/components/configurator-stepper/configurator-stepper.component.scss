@@ -1,0 +1,19 @@
+.stepperContainer {
+    justify-content: center;
+    display: flex;
+    direction: row;
+    width: 100%;
+}
+
+.stepperButton {
+    border-radius: 0;
+    height: 60px;
+    margin-left: 0;
+    border: 1px solid #808080;
+    margin-right: 0;
+    flex: 0 0 33.333333%;
+}
+
+.activeStep {
+    background-color: #808080;
+}

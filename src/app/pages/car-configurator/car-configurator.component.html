@@ -1,0 +1,42 @@
+<p>car-configurator works!</p>
+<h1>Step 2: Select your config and options</h1>
+
+<form [formGroup]="configuratorForm">
+  <label for="configSelect">Config: </label>
+  <select name="configSelect" id="configSelect" formControlName="configSelect">
+    <option value="-1" selected>Choose...</option>
+    <option *ngFor="let config of configurations?.configs" [value]="config.id">
+      {{ config.description }}
+    </option>
+  </select>
+
+  <div class="singleLine" *ngIf="carConfiguration">
+    <p>
+      Range: {{ carConfiguration.range }} miles - Max speed:
+      {{ carConfiguration.speed }} - Cost:
+      {{ carConfiguration.price | currency : "USD" }}
+    </p>
+  </div>
+
+  <div class="singleLine" *ngIf="configurations?.towHitch">
+    <label for="includeTow">Tow hitch? </label>
+    <input
+      type="checkbox"
+      name="includeTow"
+      id="includeTow"
+      [checked]="state.getCarSummary().towHitch"
+      (change)="onChangeTowHitch($event)"
+    />
+  </div>
+
+  <div class="singleLine" *ngIf="configurations?.yoke">
+    <label for="includeYoke">Yoke steering wheel? </label>
+    <input
+      type="checkbox"
+      name="includeYoke"
+      id="includeYoke"
+      [checked]="state.getCarSummary().yoke"
+      (change)="onChangeYoke($event)"
+    />
+  </div>
+</form>

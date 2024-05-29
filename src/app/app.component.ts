@@ -1,15 +1,17 @@
 import {Component} from '@angular/core';
-import {AsyncPipe, JsonPipe} from '@angular/common';
+import {CommonModule} from '@angular/common';
+import { RouterOutlet } from '@angular/router';
+import { ConfiguratorStepperComponent } from './components/configurator-stepper/configurator-stepper.component';
+import { ImageShowcaseComponent } from './components/image-showcase/image-showcase.component';
+import { StateHandlerService } from './services/state-handler/state-handler.service';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [AsyncPipe, JsonPipe],
-  template: `
-    <h1>Hello from {{ name }}!</h1>
-  `,
+  imports: [RouterOutlet, CommonModule, ConfiguratorStepperComponent, ImageShowcaseComponent],
+  templateUrl: `./app.component.html`,
+  styleUrl:'./app.component.scss'
 })
 export class AppComponent {
-  name = 'Angular';
-
+  constructor(public state: StateHandlerService){}
 }
