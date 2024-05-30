@@ -1,6 +1,6 @@
 <div class="stepperContainer">
     <button 
-    id="carSelector"
+    id="step1"
     class="stepperButton"
     (click)="navigateToStep('selectCar')"
     [ngClass]="{activeStep: router.url === '/selectCar'}"
@@ -8,7 +8,7 @@
     Step 1
 </button>
     <button 
-    id="carConfigurator"
+    id="step2"
     class="stepperButton"
     (click)="navigateToStep('configureCar')"
     [ngClass]="{activeStep: router.url === '/configureCar'}"
@@ -17,7 +17,7 @@
     Step 2
 </button>
     <button 
-    id="carSummary"
+    id="step3"
     class="stepperButton"
     (click)="navigateToStep('reviewSummary')"
     [ngClass]="{activeStep: router.url === '/reviewSummary'}"

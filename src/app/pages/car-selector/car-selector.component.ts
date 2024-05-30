@@ -14,8 +14,8 @@ import { StateHandlerService } from '../../services/state-handler/state-handler.
 })
 export class CarSelectorComponent {
   chooseCarForm = new FormGroup({
-    carModelSelect: new FormControl('', [Validators.required]),
-    carColorSelect: new FormControl('', [Validators.required]),
+    modelSelect: new FormControl('', [Validators.required]),
+    colorSelect: new FormControl('', [Validators.required]),
   });
 
   teslaModels: CarModelDTO[] = []
@@ -41,11 +41,11 @@ export class CarSelectorComponent {
   initByState() {
     const summary = this.state.getCarSummary()
     console.log(summary)
-    this.chooseCarForm.setValue({carModelSelect: summary.code!, carColorSelect: summary.color?.code!})
+    this.chooseCarForm.setValue({modelSelect: summary.code!, colorSelect: summary.color?.code!})
   }
 
   subscribeToTeslaModelOnChange() {
-    this.chooseCarForm.controls['carModelSelect'].valueChanges.subscribe(value => {
+    this.chooseCarForm.controls['modelSelect'].valueChanges.subscribe(value => {
       this.resetColorsFormControl()
       this.initColorsArray(value)
     });
@@ -57,8 +57,8 @@ export class CarSelectorComponent {
         switch(status) {
 
           case 'VALID':
-            const chosenModel = this.teslaModels.find(({code}) => code === this.chooseCarForm.get('carModelSelect')?.value)
-            const chosenColor = chosenModel?.colors.find(({code}) => code === this.chooseCarForm.get('carColorSelect')?.value)
+            const chosenModel = this.teslaModels.find(({code}) => code === this.chooseCarForm.get('modelSelect')?.value)
+            const chosenColor = chosenModel?.colors.find(({code}) => code === this.chooseCarForm.get('colorSelect')?.value)
             console.log("chosenModel",chosenModel)
             console.log("teslamodel",this.teslaModels)
             this.state.setSelectedCarModel(
@@ -78,14 +78,14 @@ export class CarSelectorComponent {
     const newColors = this.teslaModels.find(({code}) => code === modelCode)?.colors
     if (newColors) {
       this.carColors = newColors
-      this.chooseCarForm.controls['carColorSelect'].setValue(this.carColors[0].code)
+      this.chooseCarForm.controls['colorSelect'].setValue(this.carColors[0].code)
     } else {
       this.carColors = []
     }
   }
 
   resetColorsFormControl() {
-    this.chooseCarForm.controls['carColorSelect'].setValue('');
+    this.chooseCarForm.controls['colorSelect'].setValue('');
   }
 
 }
